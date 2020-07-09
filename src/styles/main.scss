@@ -1,3 +1,70 @@
+$size-block: 100px;
+$f-family: arial, helvetica, sans-serif;
+$f-size: 30px;
+$bg-color__hover:#ffbfcb;
+
+$days: (
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+}
+
+.calendar {
+  $calendar: &;
+
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 750px;
+
+  @for $i from 1 through 31 {
+    & :nth-child(n + #{$i}) {
+      width: $size-block;
+      height: $size-block;
+      border: 1px solid #000;
+      position: relative;
+      margin: 0.5px;
+      background-color: #eee;
+      cursor: pointer;
+    }
+
+    & :nth-child(n + #{$i})::before {
+      content: "#{$i}";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: $f-size;
+      font-family: $f-family;
+    }
+
+    & :nth-child(n + #{$i}):hover {
+      background-color: $bg-color__hover;
+      top: -20px;
+    }
+
+    @for $i from 28 to 31 {
+      .calendar-#{$i} ~ div:nth-child(n + #{$i}) {
+        display: none;
+      }
+    }
+  }
+}
+
+@each $week-day, $left-identation in $days {
+  .calendar-#{$week-day} {
+    div:first-child {
+      margin-left: $left-identation * ($size-block + 1px);
+    }
+  }
 }
