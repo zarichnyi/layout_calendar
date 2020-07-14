@@ -36,6 +36,7 @@ body {
       margin: 0.5px;
       background-color: #eee;
       cursor: pointer;
+      transition: background-color 1s, transform 1s;
     }
 
     & :nth-child(n + #{$i})::before {
@@ -50,11 +51,11 @@ body {
 
     & :nth-child(n + #{$i}):hover {
       background-color: $bg-color__hover;
-      top: -20px;
+      transform: translate(0, -20px);
     }
 
-    @for $i from 28 to 31 {
-      .calendar-#{$i} ~ div:nth-child(n + #{$i}) {
+    @for $i from 27 through 31 {
+      &.calendar-#{$i} div:nth-child(n+#{$i}) {
         display: none;
       }
     }
