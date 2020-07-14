@@ -55,7 +55,7 @@ body {
     }
 
     @for $i from 27 through 31 {
-      &.calendar-#{$i} div:nth-child(n+#{$i}) {
+      &.calendar-#{$i} div:nth-child(n+#{$i+1}) {
         display: none;
       }
     }
